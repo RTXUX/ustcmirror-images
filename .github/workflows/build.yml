@@ -30,8 +30,8 @@ jobs:
         if: "github.ref == 'refs/heads/master' && github.repository == 'rtxux/ustcmirror-images'"
         with:
             registry: ${{ env.REGISTRY }}
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
+            username: ${{ secrets.GH_USER }}
+            password: ${{ secrets.GH_TOKEN }}
 
       - name: Deploy
         if: "github.ref == 'refs/heads/master' && github.repository == 'rtxux/ustcmirror-images'"
@@ -39,5 +39,3 @@ jobs:
         env:
           DEBUG: true
           SKIP_LOGIN: 1
-          DOCKER_USER: ${{ secrets.DOCKER_USER }}
-          DOCKER_PASS: ${{ secrets.DOCKER_PASS }}

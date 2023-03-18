@@ -1,4 +1,4 @@
-FROM ustcmirror/base:alpine
+FROM ghcr.io/ustcmirror-test/base:alpine
 
 RUN \
     # Install Nix. To simplify management we only copy binaries and create
