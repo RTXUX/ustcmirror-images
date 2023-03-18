@@ -37,5 +37,7 @@ jobs:
         if: "github.ref == 'refs/heads/master' && github.repository == 'rtxux/ustcmirror-images'"
         run: ./push.sh
         env:
+          DEBUG: true
+          SKIP_LOGIN: 1
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
           DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
