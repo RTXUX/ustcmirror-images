@@ -1,14 +1,8 @@
 name: Build
 
 on:
-  push:
-    branches: [ 'master' ]
-  pull_request:
-    branches: [ '*' ]
-
   workflow_dispatch: {}
-  schedule:
-    - cron: '30 23 1 * *'
+
 
 jobs:
   build:
@@ -28,8 +22,16 @@ jobs:
           COMMIT_FROM: ${{ github.event.before }}
           COMMIT_TO: ${{ github.event.after }}
 
+      - name: Login to ghcr
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        if: "github.ref == 'refs/heads/master' && github.repository == 'rtxux/ustcmirror-images'"
+        with:
+            registry: ${{ env.REGISTRY }}
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Deploy
-        if: "github.ref == 'refs/heads/master' && github.repository == 'ustclug/ustcmirror-images'"
+        if: "github.ref == 'refs/heads/master' && github.repository == 'rtxux/ustcmirror-images'"
         run: ./push.sh
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
