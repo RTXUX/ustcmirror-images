@@ -198,11 +198,11 @@ class Builder():
             if os.access(build_script, os.X_OK):
                 self._print_command('cd {} && ./build {}'.format(img, tag))
             elif tag == 'latest':
-                self._print_command('docker build -t {0} {1}/'.format(
+                self._print_command('docker build --label "org.opencontainers.image.source=https://github.com/ustcmirror-test/ustcmirror-images" -t {0} {1}/'.format(
                     dst, img))
             else:
                 self._print_command(
-                    'docker build -t {0} -f {1}/Dockerfile.{2} {1}/'.format(
+                    'docker build --label "org.opencontainers.image.source=https://github.com/ustcmirror-test/ustcmirror-images" -t {0} -f {1}/Dockerfile.{2} {1}/'.format(
                         dst, img, tag))
 
             if not is_cron or force_date_tag:

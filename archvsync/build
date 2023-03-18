@@ -5,4 +5,4 @@ set -e
 cd upstream
 git apply ../update.patch
 cp bin/{common,ftpsync} ..
-docker build -t ghcr.io/ustcmirror-test/archvsync ..
+docker build --label "org.opencontainers.image.source=https://github.com/ustcmirror-test/ustcmirror-images" -t ghcr.io/ustcmirror-test/archvsync ..
